@@ -2,6 +2,7 @@
 
 ### About
 The ultimate transit app for SFU Students.
+Rate, comment, ride. Use this app to view top rated buses and see what other people think about the ride.
 
 ### Features
 - Display live user ratings and reviews for each bus stops for 143, 144, 145
