@@ -13,42 +13,42 @@
         android:theme="@style/Theme.SFUTransiter"
         tools:targetApi="31">
         <activity
-            android:name=".SelectStation"
+            android:name=".views.select_station.SelectStation"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CommentBoard"
+            android:name=".views.comment_board.CommentBoard"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".BusSummary"
+            android:name=".views.bus_summary.BusSummary"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".SelectBus"
+            android:name=".views.select_bus.SelectBus"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".SearchBy"
+            android:name=".views.search_by.SearchBy"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".views.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
