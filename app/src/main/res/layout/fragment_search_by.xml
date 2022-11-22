@@ -12,8 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="112dp"
-        android:text="Search By"
-        android:textSize="24dp"
+        android:text="@string/search_by"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,27 +21,27 @@
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_bus_stop"
         android:layout_width="170dp"
         android:layout_height="240dp"
         android:layout_marginTop="180dp"
         android:drawableTop="@drawable/bus_stop_icon_state"
-        android:text="Bus Stop"
+        android:text="@string/bus_stop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.932"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtSearchByTitle" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btn_bus"
         android:layout_width="170dp"
         android:layout_height="240dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="180dp"
         android:drawableTop="@drawable/bus_icon_state"
         android:paddingTop="10dp"
-        android:text="Bus"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        android:text="@string/bus"
+        app:layout_constraintEnd_toStartOf="@+id/btn_bus_stop"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtSearchByTitle" />
@@ -51,7 +51,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:iconifiedByDefault="false"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/btn_bus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.297"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,11 +64,12 @@
         android:layout_width="54dp"
         android:layout_height="48dp"
         android:layout_marginBottom="91dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/btn_bus_stop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/search_view"
-        app:srcCompat="@drawable/ic_baseline_star_24" />
+        app:srcCompat="@drawable/ic_baseline_star_24"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

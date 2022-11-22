@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.select_bus.SelectBus">
+
+    <TextView
+        android:id="@+id/txtSearchBusTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:layout_gravity="center"
+        android:text="@string/select_bus"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:columnCount="2"
+        android:rowCount="2">
+
+        <Button
+            android:id="@+id/btn143"
+            android:layout_width="170dp"
+            android:layout_height="240dp"
+            android:layout_marginStart="16dp"
+            android:drawableTop="@drawable/bus_icon_state"
+            android:paddingTop="10dp"
+            android:text="@string/_143" />
+
+        <Button
+            android:id="@+id/btn144"
+            android:layout_width="170dp"
+            android:layout_height="240dp"
+            android:layout_marginStart="16dp"
+            android:drawableTop="@drawable/bus_icon_state"
+            android:paddingTop="10dp"
+            android:text="@string/_144"
+            tools:layout_editor_absoluteY="149dp" />
+
+        <Button
+            android:id="@+id/btnR5"
+            android:layout_width="170dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginStart="16dp"
+            android:clickable="false"
+            android:drawableTop="@drawable/bus_icon_state"
+            android:paddingTop="10dp"
+            android:text="@string/r5" />
+
+        <Button
+            android:id="@+id/btn145"
+            android:layout_width="170dp"
+            android:layout_height="240dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="17dp"
+            android:drawableTop="@drawable/bus_icon_state"
+            android:paddingTop="10dp" />
+    </GridLayout>
+</LinearLayout>
