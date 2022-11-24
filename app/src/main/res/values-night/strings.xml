@@ -13,4 +13,8 @@
     <string name="_144">144</string>
     <string name="r5">R5</string>
     <string name="_145">145</string>
+    <string name="disclaimer">Disclaimer</string>
+    <string name="do_not_show_again">Do not show again</string>
+    <string name="i_understand">I understand</string>
+    <string name="translink_disclaimer">Some of the data used in this product or service is provided by permission of TransLink. TransLink assumes no responsibility for the accuracy or currency of the Data used in this product or service.</string>
 </resources>
