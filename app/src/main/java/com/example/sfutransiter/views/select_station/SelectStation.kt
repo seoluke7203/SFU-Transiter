@@ -24,6 +24,6 @@ class SelectStation : Fragment() {
         @JvmStatic
         fun newInstance() = SelectStation()
 
-        val TAG = SelectStation::class.java.simpleName
+        val TAG: String = SelectStation::class.java.simpleName
     }
 }

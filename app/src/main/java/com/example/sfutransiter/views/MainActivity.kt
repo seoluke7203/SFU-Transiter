@@ -1,15 +1,19 @@
 package com.example.sfutransiter.views
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import com.example.sfutransiter.R
 import com.example.sfutransiter.databinding.ActivityMainBinding
+import com.example.sfutransiter.util.Util
+import com.example.sfutransiter.views.bus_summary.BusSummary
 import com.example.sfutransiter.views.components.BaseActivity
 import com.example.sfutransiter.views.search_by.SearchBy
 import com.example.sfutransiter.views.select_bus.SelectBus
 
 class MainActivity : BaseActivity(),
     MainFragment.MainFragmentInterface,
-    SearchBy.SearchByFragmentInterface {
+    SearchBy.SearchByFragmentInterface,
+    SelectBus.SelectBusInterface {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
@@ -17,7 +21,25 @@ class MainActivity : BaseActivity(),
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Util.checkPermissions(this)
+
         addFragment(R.id.mainFragmentContainer, MainFragment.newInstance(), MainFragment.TAG, false)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == Util.PERM_REQUEST_CODE) {
+            for (i in permissions.indices) {
+                if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                    Util.checkPermissions(this)
+                    return
+                }
+            }
+        }
     }
 
     override fun swapToSearchBy() {
@@ -26,5 +48,9 @@ class MainActivity : BaseActivity(),
 
     override fun swapToSelectBus() {
         replaceFragment(R.id.mainFragmentContainer, SelectBus.newInstance(), SelectBus.TAG)
+    }
+
+    override fun swapToBusSummary(routeId: String) {
+        replaceFragment(R.id.mainFragmentContainer, BusSummary.newInstance(routeId), BusSummary.TAG)
     }
 }

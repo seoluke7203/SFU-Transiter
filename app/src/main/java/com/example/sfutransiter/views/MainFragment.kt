@@ -44,7 +44,7 @@ class MainFragment : Fragment() {
         @JvmStatic
         fun newInstance() = MainFragment()
 
-        val TAG = MainFragment::class.java.simpleName
+        val TAG: String = MainFragment::class.java.simpleName
     }
 
     interface MainFragmentInterface {

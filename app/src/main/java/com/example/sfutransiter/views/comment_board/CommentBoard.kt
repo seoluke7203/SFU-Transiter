@@ -24,6 +24,6 @@ class CommentBoard : Fragment() {
         @JvmStatic
         fun newInstance() = CommentBoard()
 
-        val TAG = CommentBoard::class.java.simpleName
+        val TAG: String = CommentBoard::class.java.simpleName
     }
 }

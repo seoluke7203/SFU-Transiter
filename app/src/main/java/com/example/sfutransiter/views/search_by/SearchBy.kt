@@ -48,7 +48,7 @@ class SearchBy : Fragment() {
         @JvmStatic
         fun newInstance() = SearchBy()
 
-        val TAG = SearchBy::class.java.simpleName
+        val TAG: String = SearchBy::class.java.simpleName
     }
 
     interface SearchByFragmentInterface {
