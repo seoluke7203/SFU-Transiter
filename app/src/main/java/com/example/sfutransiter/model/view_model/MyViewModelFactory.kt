@@ -11,8 +11,8 @@ class MyViewModelFactory(private val repository: Repository) : ViewModelProvider
         @Suppress("UNCHECKED_CAST")
         if (modelClass.isAssignableFrom(TransitViewModel::class.java) && repository is TLinkRepo)
             return TransitViewModel(repository) as T
-        else if (modelClass.isAssignableFrom(BusViewModel::class.java) && repository is AWSRepo)
-            return BusViewModel(repository) as T
+        else if (modelClass.isAssignableFrom(BusReviewViewModel::class.java) && repository is AWSRepo)
+            return BusReviewViewModel(repository) as T
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
