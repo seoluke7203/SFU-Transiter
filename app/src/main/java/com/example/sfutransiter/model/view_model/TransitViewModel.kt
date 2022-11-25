@@ -1,12 +1,14 @@
-package com.example.sfutransiter.model
+package com.example.sfutransiter.model.view_model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.sfutransiter.repository.Repository
+import com.example.sfutransiter.model.Bus
+import com.example.sfutransiter.model.BusStop
+import com.example.sfutransiter.repository.TLinkRepo
 import retrofit2.Response
 
-class TransitViewModel(private val repository: Repository) : ViewModel() {
+class TransitViewModel(private val repository: TLinkRepo) : ViewModel() {
     private var busesByRoute = MutableLiveData<Response<Array<Bus>>>()
     private var stopsNear = MutableLiveData<Response<Array<BusStop>>>()
 

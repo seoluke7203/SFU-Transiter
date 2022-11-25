@@ -10,9 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sfutransiter.backend.RetrofitAPI
 import com.example.sfutransiter.databinding.FragmentBusSummaryBinding
 import com.example.sfutransiter.model.Bus
-import com.example.sfutransiter.model.MyViewModelFactory
-import com.example.sfutransiter.model.TransitViewModel
-import com.example.sfutransiter.repository.Repository
+import com.example.sfutransiter.model.view_model.BusViewModel
+import com.example.sfutransiter.model.view_model.MyViewModelFactory
+import com.example.sfutransiter.model.view_model.TransitViewModel
+import com.example.sfutransiter.repository.AWSRepo
+import com.example.sfutransiter.repository.TLinkRepo
 import retrofit2.Response
 
 private const val ARG_ROUTE_ID = "routeId"
@@ -29,10 +31,15 @@ class BusSummary : Fragment() {
         arguments?.let {
             routeId = it.getString(ARG_ROUTE_ID)!!
         }
-        val repo = Repository(RetrofitAPI.getInstance())
+        val repo = TLinkRepo(RetrofitAPI.getTransLinkInstance())
         val viewModelFactory = MyViewModelFactory(repo)
         val viewModel = ViewModelProvider(this, viewModelFactory)[TransitViewModel::class.java]
         buses = viewModel.getBusesByRoute(routeId)
+
+        val awsRepo = AWSRepo(RetrofitAPI.getAWSInstance())
+        val awsViewModelFactory = MyViewModelFactory(awsRepo)
+        val awsViewModel = ViewModelProvider(this, awsViewModelFactory)[BusViewModel::class.java]
+        awsViewModel.ping()
     }
 
     override fun onCreateView(
