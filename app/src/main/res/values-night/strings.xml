@@ -17,4 +17,5 @@
     <string name="do_not_show_again">Do not show again</string>
     <string name="i_understand">I understand</string>
     <string name="translink_disclaimer">Some of the data used in this product or service is provided by permission of TransLink. TransLink assumes no responsibility for the accuracy or currency of the Data used in this product or service.</string>
+    <string name="currently_n_buses_on_road">Currently %1$d buses on road</string>
 </resources>
