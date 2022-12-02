@@ -41,6 +41,27 @@ class TLinkRepo(retrofit: Retrofit) : Repository() {
     }
 
     /**
+     * Get the buses by stop number
+     * @param stopId the stop (e.g. 60980)
+     */
+    fun getBusesByStop(stopId: String): MutableLiveData<Response<Array<Bus>>> {
+        val busesLiveData = MutableLiveData<Response<Array<Bus>>>()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = tLink.getBusesByStop(stopId)
+                if (!response.isSuccessful) {
+                    // Caller should handle error responses
+                    Log.e(Repository::class.java.simpleName, "getBuses: $response")
+                }
+                busesLiveData.postValue(response)
+            } catch (e: java.lang.Exception) {
+                Log.e(Repository::class.java.simpleName, "getBuses: Failed to get data, $e")
+            }
+        }
+        return busesLiveData
+    }
+
+    /**
      * Get the stops near lat long coordinates
      * @param lat latitude
      * @param long longitude

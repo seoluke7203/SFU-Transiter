@@ -48,7 +48,12 @@ class BusSummary : Fragment() {
         val repo = TLinkRepo(RetrofitAPI.getTransLinkInstance())
         val viewModelFactory = MyViewModelFactory(repo)
         val viewModel = ViewModelProvider(this, viewModelFactory)[TransitViewModel::class.java]
-        buses = viewModel.getBusesByRoute(routeId)
+
+        val regex = Regex("\\d{5}")
+        if(routeId.matches(regex))
+            buses = viewModel.getBusesByStop(routeId)
+        else
+            buses = viewModel.getBusesByRoute(routeId)
         // TODO get stop estimates
         // stopEstimates = viewModel.getStopEstimates(52807, routeNo = routeId)
 
@@ -80,6 +85,7 @@ class BusSummary : Fragment() {
             val buss = it.body()!!
             binding.txtBusTotal.text = getString(R.string.currently_n_buses_on_road, buss.size)
             binding.recyclerBuses.adapter = BusRecyclerAdapter(buss)
+
         }
     }
 

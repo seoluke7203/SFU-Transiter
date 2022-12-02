@@ -10,8 +10,8 @@ import com.example.sfutransiter.model.BusStop
 
 class StationNBAdapter(myInterface: SelectStation.SelectStationInterface) : RecyclerView.Adapter<StationNBAdapter.ViewHolder>() {
 
-    val myStops = ArrayList<BusStop>()
-    var selectInterface = myInterface
+    private val myStops = ArrayList<BusStop>()
+    private var selectInterface = myInterface
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.station_near_item, parent,false)
 
@@ -21,14 +21,12 @@ class StationNBAdapter(myInterface: SelectStation.SelectStationInterface) : Recy
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val busItem = myStops.get(position)
 
-        //if(busItem.name == "143" || busItem.name == "144" || busItem.name == "145" || busItem.name == "R5") {
-            holder.stationName.text = busItem.name
-            holder.stationDistance.text = busItem.distance.toString()
+        holder.stationName.text = busItem.name
+        holder.stationDistance.text = busItem.distance.toString()
 
-            holder.stationName.setOnClickListener {
-                selectInterface.swapToBusSummary(busItem.stopNo.toString())
-            }
-        //}
+        holder.stationName.setOnClickListener {
+            selectInterface.swapToBusSummary(busItem.stopNo.toString())
+        }
     }
 
     override fun getItemCount(): Int {

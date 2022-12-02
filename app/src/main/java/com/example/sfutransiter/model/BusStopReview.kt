@@ -38,5 +38,7 @@ class BusStopReview() {
         val status: String
     )
 
-    data class ResponseList(@SerializedName("list") val list: ArrayList<Response>)
+    data class ResponseList(
+        @SerializedName("list")
+        val list: ArrayList<Response>)
 }

@@ -10,8 +10,8 @@ import com.example.sfutransiter.model.BusStop
 
 class StationListAdapter(myInterface: SelectStation.SelectStationInterface) : RecyclerView.Adapter<StationListAdapter.ViewHolder>() {
 
-    val myStops = ArrayList<BusStop>()
-    var selectInterface = myInterface
+    private var myStops = ArrayList<BusStop>()
+    private var selectInterface = myInterface
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.station_list_item, parent,false)
@@ -22,12 +22,10 @@ class StationListAdapter(myInterface: SelectStation.SelectStationInterface) : Re
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val busItem = myStops.get(position)
 
-        //if(busItem.name == "143" || busItem.name == "144" || busItem.name == "145" || busItem.name == "R5") {
         holder.stationName.text = busItem.name
         holder.stationName.setOnClickListener {
             selectInterface.swapToBusSummary(busItem.stopNo.toString())
         }
-        //}
     }
 
     override fun getItemCount(): Int {
@@ -35,8 +33,9 @@ class StationListAdapter(myInterface: SelectStation.SelectStationInterface) : Re
     }
 
     fun replaceList(newArray: Array<BusStop>){
-        myStops.clear()
         myStops.addAll(newArray)
+        myStops.sortBy { it.name }
+        myStops = myStops.distinctBy { it.stopNo } as ArrayList<BusStop>
     }
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {

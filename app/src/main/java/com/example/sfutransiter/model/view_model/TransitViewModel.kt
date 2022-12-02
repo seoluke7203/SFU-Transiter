@@ -11,12 +11,18 @@ import retrofit2.Response
 
 class TransitViewModel(private val repository: TLinkRepo) : ViewModel() {
     private var busesByRoute = MutableLiveData<Response<Array<Bus>>>()
+    private var busesByStop = MutableLiveData<Response<Array<Bus>>>()
     private var stopsNear = MutableLiveData<Response<Array<BusStop>>>()
     private var stopEstimates = MutableLiveData<Response<Array<StopEstimate>>>()
 
     fun getBusesByRoute(routeId: String): LiveData<Response<Array<Bus>>> {
         busesByRoute = repository.getBusesByRoute(routeId)
         return busesByRoute
+    }
+
+    fun getBusesByStop(stopID: String): LiveData<Response<Array<Bus>>> {
+        busesByStop = repository.getBusesByStop(stopID)
+        return busesByStop
     }
 
     fun getStopsNear(

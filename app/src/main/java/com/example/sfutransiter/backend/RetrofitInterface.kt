@@ -18,6 +18,13 @@ interface RetrofitInterface {
             "Accept: application/json",
             "Content-type: application/JSON"
         )
+        @GET("buses?apikey=${BuildConfig.TRANSLINK_API_KEY}")
+        suspend fun getBusesByStop(@Query("stopNo") stopNo: String): Response<Array<Bus>>
+
+        @Headers(
+            "Accept: application/json",
+            "Content-type: application/JSON"
+        )
         @GET("stops?apikey=${BuildConfig.TRANSLINK_API_KEY}")
         suspend fun getStopsNear(
             @Query("lat") lat: Double,

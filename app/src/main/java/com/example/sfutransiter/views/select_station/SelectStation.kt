@@ -5,14 +5,12 @@ import android.content.Context
 import android.content.Context.LOCATION_SERVICE
 import android.content.pm.PackageManager
 import android.location.*
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
@@ -27,7 +25,6 @@ import com.example.sfutransiter.model.view_model.TransitViewModel
 import com.example.sfutransiter.repository.TLinkRepo
 import com.example.sfutransiter.views.MainFragment
 import retrofit2.Response
-import kotlin.math.round
 import kotlin.math.roundToInt
 
 class SelectStation : Fragment(), LocationListener {
@@ -38,6 +35,7 @@ class SelectStation : Fragment(), LocationListener {
     private lateinit var currentLocation : Location
     private lateinit var nearbyStops: LiveData<Response<Array<BusStop>>>
     private lateinit var listStops: LiveData<Response<Array<BusStop>>>
+    private lateinit var adapterList : StationListAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -58,19 +56,30 @@ class SelectStation : Fragment(), LocationListener {
         val viewModelFactory = MyViewModelFactory(repo)
         val viewModel = ViewModelProvider(this, viewModelFactory)[TransitViewModel::class.java]
 
-        //Check GPS permissions and get current lat/long coordinates
-        checkPermission()
-        println("debug: Lat: ${currentLocation.latitude} Long: ${currentLocation.longitude}")
-        nearbyStops = viewModel.getStopsNear(round(currentLocation.latitude),roundToSix(currentLocation.longitude), 1000,)
-        listStops = viewModel.getStopsNear(round(currentLocation.latitude),roundToSix(currentLocation.longitude), 2000,)
+        getCurrentLocation()
+        nearbyStops = viewModel.getStopsNear(roundToSix(currentLocation.latitude),roundToSix(currentLocation.longitude), 200)
+
+        //Get all related stops near SFU Burnaby
+        val sfuLat = 49.2781
+        val sfuLng = -122.9199
+        listStops = viewModel.getStopsNear(sfuLat,sfuLng,2000,"143")
+        updateStopList()
+        listStops = viewModel.getStopsNear(sfuLat,sfuLng,2000,"144")
+        updateStopList()
+        listStops = viewModel.getStopsNear(sfuLat,sfuLng,2000,"145")
+        updateStopList()
+        listStops = viewModel.getStopsNear(sfuLat,sfuLng,2000,"R5")
+        updateStopList()
 
         //Display RecyclerLayouts
         val stationNBView : RecyclerView = binding.root.findViewById(R.id.stationsNBList)
         val stationListView : RecyclerView = binding.root.findViewById(R.id.stationsList)
         val adapterNB = StationNBAdapter(selectStationInterface)
-        val adapterList = StationListAdapter(selectStationInterface)
+        adapterList = StationListAdapter(selectStationInterface)
         stationNBView.adapter = adapterNB
         stationListView.adapter = adapterList
+
+        //Required to display the second RecyclerView
         stationListView.layoutManager = LinearLayoutManager(requireContext())
 
         nearbyStops.observe(viewLifecycleOwner) {
@@ -78,17 +87,11 @@ class SelectStation : Fragment(), LocationListener {
             adapterNB.notifyDataSetChanged()
         }
 
-        listStops.observe(viewLifecycleOwner) {
-            it.body()?.let { it1 -> adapterList.replaceList(it1) }
-            adapterList.notifyDataSetChanged()
-        }
-
-
         return binding.root
     }
 
-    private fun getCurrentLocation(context: Context) {
-        locationManager = context.getSystemService(LOCATION_SERVICE) as LocationManager
+    private fun getCurrentLocation() {
+        locationManager = context?.getSystemService(LOCATION_SERVICE) as LocationManager
         val criteria = Criteria()
 
         criteria.accuracy = Criteria.ACCURACY_FINE
@@ -112,20 +115,20 @@ class SelectStation : Fragment(), LocationListener {
         currentLocation = location
     }
 
-
-    private fun checkPermission() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) !=
-            PackageManager.PERMISSION_GRANTED) ActivityCompat.requestPermissions(requireActivity(),
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 0) else getCurrentLocation(requireContext())
-    }
-
-    //Translink API only accepts up to six decimals places for lat/long values
+    //Trans link API only accepts up to six decimals places for lat/long values
     private fun roundToSix(num : Double) : Double {
         return (num * 1000000.0).roundToInt() / 1000000.0
     }
 
+    private fun updateStopList() {
+        listStops.observe(viewLifecycleOwner) {
+            it.body()?.let { it1 -> adapterList.replaceList(it1) }
+            adapterList.notifyDataSetChanged()
+        }
+    }
+
     interface SelectStationInterface {
-        fun swapToBusSummary(stop : String)
+        fun swapToBusSummary(routeId : String)
     }
 
     companion object {
