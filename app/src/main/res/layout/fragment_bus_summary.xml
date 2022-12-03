@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
         android:text="143"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.116"
@@ -34,10 +34,10 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/busitemList"/>
+        app:layout_constraintBottom_toTopOf="@+id/recycler_buses" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/busitemList"
+        android:id="@+id/recycler_buses"
         android:layout_width="413dp"
         android:layout_height="427dp"
         android:orientation="vertical"
@@ -45,17 +45,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBusNum"
+        app:layout_constraintTop_toBottomOf="@+id/txt_bus_total"
         app:layout_constraintVertical_bias="0.291"
         tools:listitem="@layout/bus_item" />
 
     <Button
-        android:id="@+id/txtComments"
+        android:id="@+id/btn_comments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="16 comments"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/busitemList"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_buses"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.895"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,11 +63,11 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/txtBusNum"
+        android:id="@+id/txt_bus_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:text="Currently 4 buses on road"
+        android:text="@string/currently_n_buses_on_road"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

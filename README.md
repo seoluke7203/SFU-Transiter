@@ -33,6 +33,8 @@ Translink API key is required:
     5. `keys.properties` should be created and then paste the key in as intructed from step 3.
 4. you are ready to use the Translink api and develop! 😀
 
+Now we need the AWS URL (or key) to communicate with our backend. For this, contact one of our team members for the key, place it in `keys.properties` like in the previous steps `AWS_API_KEY="URL"`.
+
 see https://www.translink.ca/about-us/doing-business-with-translink/app-developer-resources for more information
 
 ## Disclaimer

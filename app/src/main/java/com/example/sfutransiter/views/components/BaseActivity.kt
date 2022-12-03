@@ -31,4 +31,8 @@ open class BaseActivity : AppCompatActivity() {
         }
         fragmentTransaction.commit()
     }
+
+    protected fun popBackStack() {
+        supportFragmentManager.popBackStack()
+    }
 }

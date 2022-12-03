@@ -42,6 +42,9 @@ class SearchBy : Fragment() {
         binding.btnBus.setOnClickListener {
             searchByFragmentInterface.swapToSelectBus()
         }
+        binding.btnBusStop.setOnClickListener {
+            searchByFragmentInterface.swapToSelectStation()
+        }
     }
 
     companion object {
@@ -53,5 +56,6 @@ class SearchBy : Fragment() {
 
     interface SearchByFragmentInterface {
         fun swapToSelectBus()
+        fun swapToSelectStation()
     }
 }
