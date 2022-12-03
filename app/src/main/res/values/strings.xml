@@ -23,4 +23,13 @@
     <string name="title">title</string>
     <string name="message">message</string>
     <string name="currently_n_buses_on_road">Currently %1$d buses on road</string>
+    <string name="register">Register</string>
+    <string name="first_name">First name</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+    <string name="user_name">User name</string>
+    <string name="Password">Password</string>
+    <string name="register_an_account">Register an account</string>
 </resources>

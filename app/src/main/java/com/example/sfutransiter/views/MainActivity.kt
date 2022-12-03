@@ -12,16 +12,20 @@ import com.example.sfutransiter.views.bus_summary.BusSummary
 import com.example.sfutransiter.views.comment_board.CommentBoard
 import com.example.sfutransiter.views.components.BaseActivity
 import com.example.sfutransiter.views.components.DoNotShowAgainAlertDialog
+import com.example.sfutransiter.views.register.Register
 import com.example.sfutransiter.views.search_by.SearchBy
 import com.example.sfutransiter.views.select_bus.SelectBus
 import com.example.sfutransiter.views.select_station.SelectStation
+
+private var shown = false
 
 class MainActivity : BaseActivity(),
     MainFragment.MainFragmentInterface,
     SearchBy.SearchByFragmentInterface,
     SelectBus.SelectBusInterface,
     SelectStation.SelectStationInterface,
-    BusSummary.BusSummaryInterface {
+    BusSummary.BusSummaryInterface,
+    Register.RegisterInterface {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
@@ -30,16 +34,18 @@ class MainActivity : BaseActivity(),
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Util.checkPermissions(this)
-        if(!checkGPSPermission()) {
+        if (!checkGPSPermission()) {
             requestGPSPermission()
         }
         showDisclaimerDialog()
-        addFragment(
-            R.id.mainFragmentContainer,
-            MainFragment.newInstance(),
-            MainFragment.TAG,
-            false
-        )
+        if (!shown)
+            addFragment(
+                R.id.mainFragmentContainer,
+                MainFragment.newInstance(),
+                MainFragment.TAG,
+                false
+            )
+        shown = true
     }
 
     private fun showDisclaimerDialog() {
@@ -72,12 +78,18 @@ class MainActivity : BaseActivity(),
     }
 
     private fun requestGPSPermission() {
-        return ActivityCompat.requestPermissions(this,
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 0)
+        return ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 0
+        )
     }
 
     override fun swapToSearchBy() {
         replaceFragment(R.id.mainFragmentContainer, SearchBy.newInstance(), SearchBy.TAG, false)
+    }
+
+    override fun swapToRegister() {
+        replaceFragment(R.id.mainFragmentContainer, Register.newInstance(), Register.TAG)
     }
 
     override fun swapToSelectBus() {
@@ -98,5 +110,9 @@ class MainActivity : BaseActivity(),
             CommentBoard.newInstance(routeNo),
             CommentBoard.TAG
         )
+    }
+
+    override fun popBackToMain() {
+        popBackStack()
     }
 }

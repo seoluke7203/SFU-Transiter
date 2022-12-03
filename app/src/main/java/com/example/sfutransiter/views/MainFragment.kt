@@ -38,6 +38,9 @@ class MainFragment : Fragment() {
         binding.btnAnonymous.setOnClickListener {
             mainFragmentInterface.swapToSearchBy()
         }
+        binding.btnRegister.setOnClickListener {
+            mainFragmentInterface.swapToRegister()
+        }
     }
 
     companion object {
@@ -49,5 +52,6 @@ class MainFragment : Fragment() {
 
     interface MainFragmentInterface {
         fun swapToSearchBy()
+        fun swapToRegister()
     }
 }

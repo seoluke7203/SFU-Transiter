@@ -39,60 +39,68 @@
         android:id="@+id/btnAnonymous"
         android:layout_width="311dp"
         android:layout_height="48dp"
-        android:layout_marginTop="78dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_continue"
         android:fontFamily="@font/maru_regular"
         android:text="@string/continue_as_anonymous"
-        android:background="@drawable/button_continue"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btn_register"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/imgLogo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/register"
+        app:layout_constraintBottom_toTopOf="@+id/txtLogin"
+        app:layout_constraintEnd_toEndOf="@+id/txtLogin"
+        app:layout_constraintStart_toStartOf="@+id/txtLogin" />
 
     <TextView
         android:id="@+id/txtLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/maru_regular"
         android:text="@string/or_log_in"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAnonymous" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editPassword"
         android:layout_width="311dp"
         android:layout_height="48dp"
+        android:layout_marginBottom="56dp"
         android:ems="10"
         android:fontFamily="@font/maru_regular"
         android:hint="@string/password"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmail"
         android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TextFields" />
 
     <EditText
         android:id="@+id/editEmail"
         android:layout_width="311dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="84dp"
         android:ems="10"
         android:fontFamily="@font/maru_regular"
         android:hint="@string/email_example_com"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:textColorHint="#757575"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/editPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLogin"
-        app:layout_constraintVertical_bias="0.351" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
