@@ -50,18 +50,15 @@ class BusSummary : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)[TransitViewModel::class.java]
 
         val regex = Regex("\\d{5}")
-        if(routeId.matches(regex))
-            buses = viewModel.getBusesByStop(routeId)
+        buses = if (routeId.matches(regex))
+            viewModel.getBusesByStop(routeId)
         else
-            buses = viewModel.getBusesByRoute(routeId)
-        // TODO get stop estimates
-        // stopEstimates = viewModel.getStopEstimates(52807, routeNo = routeId)
+            viewModel.getBusesByRoute(routeId)
 
         val awsRepo = AWSRepo(RetrofitAPI.getAWSInstance())
         val awsViewModelFactory = MyViewModelFactory(awsRepo)
         val awsViewModel =
             ViewModelProvider(this, awsViewModelFactory)[BusReviewViewModel::class.java]
-
     }
 
     override fun onCreateView(
