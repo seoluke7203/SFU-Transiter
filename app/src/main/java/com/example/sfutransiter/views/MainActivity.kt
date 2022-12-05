@@ -9,6 +9,8 @@ import androidx.core.content.ContextCompat
 import com.example.sfutransiter.R
 import com.example.sfutransiter.databinding.ActivityMainBinding
 import com.example.sfutransiter.util.Util
+import com.example.sfutransiter.views.add_comment.AddComment
+import com.example.sfutransiter.views.add_comment.EditComment
 import com.example.sfutransiter.views.bus_summary.BusSummary
 import com.example.sfutransiter.views.comment_board.CommentBoard
 import com.example.sfutransiter.views.components.BaseActivity
@@ -27,7 +29,10 @@ class MainActivity : BaseActivity(),
     SelectBus.SelectBusInterface,
     SelectStation.SelectStationInterface,
     BusSummary.BusSummaryInterface,
-    Register.RegisterInterface {
+    Register.RegisterInterface,
+    CommentBoard.CommentInterface,
+    AddComment.AddCommentInterface,
+    EditComment.EditCommentInterface{
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
@@ -116,10 +121,16 @@ class MainActivity : BaseActivity(),
     }
 
     override fun swapToCommentBoard(routeNo: String) {
-        replaceFragment(
-            R.id.mainFragmentContainer,
-            CommentBoard.newInstance(routeNo),
-            CommentBoard.TAG
+        replaceFragment(R.id.mainFragmentContainer, CommentBoard.newInstance(routeNo), CommentBoard.TAG
+        )
+    }
+    override fun swapToAddComment(routeId: String) {
+        replaceFragment(R.id.mainFragmentContainer, AddComment.newInstance(routeId), AddComment.TAG
+        )
+    }
+
+    override fun swapToEditComment(routeId: String, stopRn: String) {
+        replaceFragment(R.id.mainFragmentContainer, EditComment.newInstance(routeId,stopRn), EditComment.TAG
         )
     }
 

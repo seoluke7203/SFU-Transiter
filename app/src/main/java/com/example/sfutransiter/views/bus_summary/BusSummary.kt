@@ -13,7 +13,6 @@ import com.example.sfutransiter.R
 import com.example.sfutransiter.backend.RetrofitAPI
 import com.example.sfutransiter.databinding.FragmentBusSummaryBinding
 import com.example.sfutransiter.model.Bus
-import com.example.sfutransiter.model.StopEstimate
 import com.example.sfutransiter.model.User
 import com.example.sfutransiter.model.view_model.BusReviewViewModel
 import com.example.sfutransiter.model.view_model.MyViewModelFactory
@@ -32,7 +31,7 @@ class BusSummary : Fragment() {
     private lateinit var busSummaryInterface: BusSummaryInterface
     private lateinit var routeId: String
     private lateinit var buses: LiveData<Response<Array<Bus>>>
-    private lateinit var stopEstimates: LiveData<Response<Array<StopEstimate>>>
+    private lateinit var awsViewModel : BusReviewViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -58,7 +57,7 @@ class BusSummary : Fragment() {
 
         val awsRepo = AWSRepo(RetrofitAPI.getAWSInstance())
         val awsViewModelFactory = MyViewModelFactory(awsRepo)
-        val awsViewModel =
+        awsViewModel =
             ViewModelProvider(this, awsViewModelFactory)[BusReviewViewModel::class.java]
 
         Log.d(TAG, "onCreate: ${User.getCurrentUser()}")

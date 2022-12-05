@@ -39,4 +39,17 @@
     <string name="username">Username</string>
     <string name="fail_login">Fail to log in: %1$s</string>
     <string name="Invalid_login">Invalid user name or password</string>
+    <string name ="your_rating">Your rating</string>
+    <string name ="crowd">How busy is it</string>
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+    <string name="safety">Safety</string>
+    <string name="safety_hint">Write any concerns here</string>
+    <string name="your_comment">Your comment</string>
+    <string name="comment_hint">Write your comments here</string>
+    <string name="delete">delete</string>
+    <string name="confirm_changes">confirm changes</string>
+    <string name="discard">discard</string>
+    <string name="post_review">Post review</string>
 </resources>
