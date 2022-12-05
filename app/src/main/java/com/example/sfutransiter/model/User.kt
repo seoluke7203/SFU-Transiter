@@ -3,6 +3,32 @@ package com.example.sfutransiter.model
 import com.google.gson.annotations.SerializedName
 
 class User {
+    data class CurrentUser(
+        val userRn: String,
+        val userName: String,
+        val email: String,
+        val firstName: String,
+        val lastName: String,
+    )
+
+    companion object {
+        private var instance: CurrentUser? = null
+
+        @JvmStatic
+        fun setCurrentUser(
+            userRn: String,
+            userName: String,
+            email: String = "",
+            firstName: String = "",
+            lastName: String = ""
+        ) {
+            instance = CurrentUser(userRn, userName, email, firstName, lastName)
+        }
+
+        @JvmStatic
+        fun getCurrentUser() = instance ?: CurrentUser("", "", "", "", "")
+    }
+
     /**
      * @param userName Required only for creating new user
      */

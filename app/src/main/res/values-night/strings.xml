@@ -27,4 +27,7 @@
     <string name="user_name">User name</string>
     <string name="Password">Password</string>
     <string name="register_an_account">Register an account</string>
+    <string name="fail_register">"Failed to register: %1$s"</string>
+    <string name="save_success">Saved successfully</string>
+    <string name="log_in">Log in</string>
 </resources>

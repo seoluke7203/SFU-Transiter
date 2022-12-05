@@ -3,6 +3,7 @@ package com.example.sfutransiter.views
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.sfutransiter.R
@@ -16,6 +17,7 @@ import com.example.sfutransiter.views.register.Register
 import com.example.sfutransiter.views.search_by.SearchBy
 import com.example.sfutransiter.views.select_bus.SelectBus
 import com.example.sfutransiter.views.select_station.SelectStation
+import kotlin.system.exitProcess
 
 private var shown = false
 
@@ -46,6 +48,15 @@ class MainActivity : BaseActivity(),
                 false
             )
         shown = true
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (supportFragmentManager.backStackEntryCount == 0) {
+                    exitProcess(0)
+                } else {
+                    popBackStack()
+                }
+            }
+        })
     }
 
     private fun showDisclaimerDialog() {

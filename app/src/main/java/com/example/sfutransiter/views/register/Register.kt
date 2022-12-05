@@ -6,8 +6,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.sfutransiter.R
+import com.example.sfutransiter.backend.RetrofitAPI
 import com.example.sfutransiter.databinding.FragmentRegisterBinding
+import com.example.sfutransiter.model.ResponseError
+import com.example.sfutransiter.model.User
+import com.example.sfutransiter.model.view_model.MyViewModelFactory
+import com.example.sfutransiter.model.view_model.UserViewModel
+import com.example.sfutransiter.repository.AWSRepo
+import com.example.sfutransiter.util.observeOnce
 import com.example.sfutransiter.views.MainFragment
 
 class Register : Fragment() {
@@ -16,11 +26,7 @@ class Register : Fragment() {
 
     private lateinit var registerInterface: RegisterInterface
 
-    private lateinit var firstName: String
-    private lateinit var lastName: String
-    private lateinit var email: String
-    private lateinit var userName: String
-    private lateinit var password: String
+    private lateinit var userViewModel: UserViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -32,11 +38,10 @@ class Register : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // TODO get API
-//        val userRepo = AWSRepo(RetrofitAPI.getAWSInstance())
-//        val userViewModelFactory = MyViewModelFactory(userRepo)
-//        val userViewModel =
-//            ViewModelProvider(this, userViewModelFactory)[UseViewModel::class.java]
+        val userRepo = AWSRepo(RetrofitAPI.getAWSInstance())
+        val userViewModelFactory = MyViewModelFactory(userRepo)
+        userViewModel =
+            ViewModelProvider(this, userViewModelFactory)[UserViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -45,7 +50,6 @@ class Register : Fragment() {
     ): View? {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
-        setupInputs()
         setupButtons()
 
         return binding.root
@@ -53,20 +57,45 @@ class Register : Fragment() {
 
     private fun setupButtons() {
         binding.btnSave.setOnClickListener {
-            // TODO save data
-            registerInterface.popBackToMain()
+            val firstName = binding.etxtFirstName.text.toString()
+            val lastName = binding.etxtLastName.text.toString()
+            val email = binding.etxtEmail.text.toString()
+            val userName = binding.etxtUsername.text.toString()
+            val password = binding.etxtPassword.text.toString()
+
+            userViewModel.createUser(
+                User.RequestBody(
+                    userName,
+                    password,
+                    email,
+                    firstName,
+                    lastName
+                )
+            ).observeOnce(viewLifecycleOwner) {
+                if (!it.isSuccessful) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(
+                            R.string.fail_register,
+                            ResponseError.fromJsonString(
+                                it.errorBody()!!.string()
+                            ).error.details[0].message
+                        ),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@observeOnce
+                }
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.save_success),
+                    Toast.LENGTH_SHORT
+                ).show()
+                registerInterface.popBackToMain()
+            }
         }
         binding.btnCancel.setOnClickListener {
             registerInterface.popBackToMain()
         }
-    }
-
-    private fun setupInputs() {
-        firstName = binding.etxtFirstName.text.toString()
-        lastName = binding.etxtLastName.text.toString()
-        email = binding.etxtEmail.text.toString()
-        userName = binding.etxtUsername.text.toString()
-        password = binding.etxtPassword.text.toString()
     }
 
     interface RegisterInterface {

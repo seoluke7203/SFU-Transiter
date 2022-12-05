@@ -30,10 +30,11 @@ class AWSRepo(retrofit: Retrofit) : Repository() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = aws.insertBusStopReview(stopNo, body)
-                if (!response.isSuccessful) {
-                    // Caller should handle error responses
-                    Log.e(Repository::class.java.simpleName, "insertBusStopReview: $response, ${response.errorBody()!!.string()}")
-                }
+//                if (!response.isSuccessful) {
+//                    // Caller should handle error responses
+//                    // For debug purposes; errorBody()!!.string() is consumed and the string value is lost on the next call
+////                    Log.e(Repository::class.java.simpleName, "insertBusStopReview: $response, ${response.errorBody()!!.string()}")
+//                }
                 stopReviewLiveData.postValue(response)
             } catch (e: java.lang.Exception) {
                 Log.e(AWSRepo::class.java.simpleName, "insertBusStopReview: Failed, $e")
@@ -57,10 +58,11 @@ class AWSRepo(retrofit: Retrofit) : Repository() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = aws.updateBusStopReview(stopNo, stopReviewRn, body)
-                if (!response.isSuccessful) {
-                    // Caller should handle error responses
-                    Log.e(Repository::class.java.simpleName, "updateBusStopReview: $response, ${response.errorBody()!!.string()}")
-                }
+//                if (!response.isSuccessful) {
+//                    // Caller should handle error responses
+//                    // For debug purposes; errorBody()!!.string() is consumed and the string value is lost on the next call
+////                    Log.e(Repository::class.java.simpleName, "updateBusStopReview: $response, ${response.errorBody()!!.string()}")
+//                }
                 stopReviewLiveData.postValue(response)
             } catch (e: java.lang.Exception) {
                 Log.e(AWSRepo::class.java.simpleName, "updateBusStopReview: Failed, $e")
@@ -82,10 +84,11 @@ class AWSRepo(retrofit: Retrofit) : Repository() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = aws.deleteBusStopReview(stopNo, stopReviewRn)
-                if (!response.isSuccessful) {
-                    // Caller should handle error responses
-                    Log.e(Repository::class.java.simpleName, "deleteBusStopReview: $response, ${response.errorBody()!!.string()}")
-                }
+//                if (!response.isSuccessful) {
+//                    // Caller should handle error responses
+//                    // For debug purposes; errorBody()!!.string() is consumed and the string value is lost on the next call
+////                    Log.e(Repository::class.java.simpleName, "deleteBusStopReview: $response, ${response.errorBody()!!.string()}")
+//                }
                 stopReviewLiveData.postValue(response)
             } catch (e: java.lang.Exception) {
                 Log.e(AWSRepo::class.java.simpleName, "deleteBusStopReview: Failed, $e")
@@ -105,10 +108,11 @@ class AWSRepo(retrofit: Retrofit) : Repository() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = aws.listBusStopReviews(stopNo)
-                if (!response.isSuccessful) {
-                    // Caller should handle error responses
-                    Log.e(Repository::class.java.simpleName, "listBusStopReview: $response, ${response.errorBody()!!.string()}")
-                }
+//                if (!response.isSuccessful) {
+//                    // Caller should handle error responses
+//                    // For debug purposes; errorBody()!!.string() is consumed and the string value is lost on the next call
+////                    Log.e(Repository::class.java.simpleName, "listBusStopReview: $response, ${response.errorBody()!!.string()}")
+//                }
                 stopReviewLiveData.postValue(response)
             } catch (e: java.lang.Exception) {
                 Log.e(AWSRepo::class.java.simpleName, "listBusStopReview: Failed, $e")
@@ -132,10 +136,11 @@ class AWSRepo(retrofit: Retrofit) : Repository() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = aws.createUser(body)
-                if (!response.isSuccessful) {
-                    // Caller should handle error responses
-                    Log.e(Repository::class.java.simpleName, "createUser: $response, ${response.errorBody()!!.string()}")
-                }
+//                if (!response.isSuccessful) {
+//                    // Caller should handle error responses
+//                    // For debug purposes; errorBody()!!.string() is consumed and the string value is lost on the next call
+////                    Log.e(Repository::class.java.simpleName, "createUser: $response, ${response.errorBody()!!.string()}")
+//                }
                 userLiveData.postValue(response)
             } catch (e: java.lang.Exception) {
                 Log.e(AWSRepo::class.java.simpleName, "createUser: Failed, $e")
@@ -157,10 +162,11 @@ class AWSRepo(retrofit: Retrofit) : Repository() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = aws.getUser(userName, userRn)
-                if (!response.isSuccessful) {
-                    // Caller should handle error responses
-                    Log.e(Repository::class.java.simpleName, "getUser: $response, ${response.errorBody()!!.string()}")
-                }
+//                if (!response.isSuccessful) {
+//                    // Caller should handle error responses
+//                    // For debug purposes; errorBody()!!.string() is consumed and the string value is lost on the next call
+////                    Log.e(Repository::class.java.simpleName, "getUser: $response, ${response.errorBody()!!.string()}")
+//                }
                 userLiveData.postValue(response)
             } catch (e: java.lang.Exception) {
                 Log.e(AWSRepo::class.java.simpleName, "getUser: Failed, $e")
@@ -182,10 +188,11 @@ class AWSRepo(retrofit: Retrofit) : Repository() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = aws.updateUser(userName, body)
-                if (!response.isSuccessful) {
-                    // Caller should handle error responses
-                    Log.e(Repository::class.java.simpleName, "updateUser: $response, ${response.errorBody()!!.string()}")
-                }
+//                if (!response.isSuccessful) {
+//                    // Caller should handle error responses
+//                    // For debug purposes; errorBody()!!.string() is consumed and the string value is lost on the next call
+////                    Log.e(Repository::class.java.simpleName, "updateUser: $response, ${response.errorBody()!!.string()}")
+//                }
                 userLiveData.postValue(response)
             } catch (e: java.lang.Exception) {
                 Log.e(AWSRepo::class.java.simpleName, "updateUser: Failed, $e")
@@ -207,10 +214,11 @@ class AWSRepo(retrofit: Retrofit) : Repository() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = aws.deleteUser(userName, body)
-                if (!response.isSuccessful) {
-                    // Caller should handle error responses
-                    Log.e(Repository::class.java.simpleName, "deleteUser: $response, ${response.errorBody()!!.string()}")
-                }
+//                if (!response.isSuccessful) {
+//                    // Caller should handle error responses
+//                    // For debug purposes; errorBody()!!.string() is consumed and the string value is lost on the next call
+////                    Log.e(Repository::class.java.simpleName, "deleteUser: $response, ${response.errorBody()!!.string()}")
+//                }
                 userLiveData.postValue(response)
             } catch (e: java.lang.Exception) {
                 Log.e(AWSRepo::class.java.simpleName, "deleteUser: Failed, $e")
@@ -235,10 +243,11 @@ class AWSRepo(retrofit: Retrofit) : Repository() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = aws.checkUserAuthorized(userName, body)
-                if (!response.isSuccessful) {
-                    // Caller should handle error responses
-                    Log.e(Repository::class.java.simpleName, "checkUserAuthorized: $response, ${response.errorBody()!!.string()}")
-                }
+//                if (!response.isSuccessful) {
+//                     // Caller should handle error responses
+//                    // For debug purposes; errorBody()!!.string() is consumed and the string value is lost on the next call
+////                    Log.e(Repository::class.java.simpleName, "checkUserAuthorized: $response, ${response.errorBody()!!.string()}")
+//                }
                 authLiveData.postValue(response)
             } catch (e: java.lang.Exception) {
                 Log.e(AWSRepo::class.java.simpleName, "checkUserAuthorized: Failed, $e")
@@ -260,10 +269,11 @@ class AWSRepo(retrofit: Retrofit) : Repository() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = aws.updateUserPassword(userName, body)
-                if (!response.isSuccessful) {
-                    // Caller should handle error responses
-                    Log.e(Repository::class.java.simpleName, "updateUserPassword: $response, ${response.errorBody()!!.string()}")
-                }
+//                if (!response.isSuccessful) {
+                // Caller should handle error responses
+                // For debug purposes; errorBody()!!.string() is consumed and the string value is lost on the next call
+//                    Log.e(Repository::class.java.simpleName, "updateUserPassword: $response, ${response.errorBody()!!.string()}")
+//                }
                 authLiveData.postValue(response)
             } catch (e: java.lang.Exception) {
                 Log.e(AWSRepo::class.java.simpleName, "updateUserPassword: Failed, $e")
