@@ -103,12 +103,30 @@ class MainActivity : BaseActivity(),
     }
 
     override fun swapToSearchBy() {
-
-        replaceFragment(R.id.mainFragmentContainer, SearchBy.newInstance(), SearchBy.TAG, false)
+        val transaction: FragmentTransaction =
+            this.supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.enter_fade_in,   // new fragment entering
+                    R.anim.scale,    // existing fragment
+                    R.anim.enter_fade_in,    // remaining fragment when exiting
+                    R.anim.exit_fade_out)    // animation when exisitng
+                .replace(R.id.mainFragmentContainer, SearchBy.newInstance(), SearchBy.TAG)
+        transaction.addToBackStack(null).commitAllowingStateLoss()
+//        replaceFragment(R.id.mainFragmentContainer, SearchBy.newInstance(), SearchBy.TAG, false)
     }
 
     override fun swapToRegister() {
-        replaceFragment(R.id.mainFragmentContainer, Register.newInstance(), Register.TAG)
+        val transaction: FragmentTransaction =
+            this.supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.enter_bottom_slide,
+                    R.anim.exit_top_slide,
+                    R.anim.enter_top_slide,
+                    R.anim.exit_bottom_slide)
+                .replace(R.id.mainFragmentContainer, Register.newInstance(), Register.TAG)
+        transaction.addToBackStack(null).commitAllowingStateLoss()
+
+//        replaceFragment(R.id.mainFragmentContainer, Register.newInstance(), Register.TAG)
     }
 
     @SuppressLint("ResourceType")
@@ -116,24 +134,24 @@ class MainActivity : BaseActivity(),
         val transaction: FragmentTransaction =
             this.supportFragmentManager.beginTransaction()
                 .setCustomAnimations(
-                    R.anim.enter,   // new fragment entering
-                    R.anim.exit,    // existing fragment
-                    R.anim.enter,    // remaining fragment when exiting
-                    R.anim.exit)    // animation when exisitng
+                    R.anim.enter_fade_in,   // new fragment entering
+                    R.anim.exit_fade_out,    // existing fragment
+                    R.anim.enter_fade_in,    // remaining fragment when exiting
+                    R.anim.exit_fade_out)    // animation when exisitng
                 .replace(R.id.mainFragmentContainer, SelectBus.newInstance(), SelectBus.TAG)
         transaction.addToBackStack(null).commitAllowingStateLoss()
 //        replaceFragment(R.id.mainFragmentContainer, SelectBus.newInstance(), BusSummary.TAG)
     }
 
     override fun swapToSelectStation() {
-        overridePendingTransition(R.anim.enter, R.anim.exit)
+        overridePendingTransition(R.anim.enter_fade_in, R.anim.exit_fade_out)
         val transactions: FragmentTransaction =
             this.supportFragmentManager.beginTransaction()
                 .setCustomAnimations(
-                    R.anim.right_enter,
-                    R.anim.left_exit,
-                    R.anim.left_enter,
-                    R.anim.right_exit
+                    R.anim.enter_right_slide,
+                    R.anim.exit_left_slide,
+                    R.anim.enter_left_slide,
+                    R.anim.exit_right_slide
                 )
                 .replace(R.id.mainFragmentContainer, SelectStation.newInstance(), BusSummary.TAG)
         transactions.addToBackStack(null).commitAllowingStateLoss()
@@ -142,16 +160,42 @@ class MainActivity : BaseActivity(),
     }
 
     override fun swapToBusSummary(routeId: String) {
-        replaceFragment(R.id.mainFragmentContainer, BusSummary.newInstance(routeId), BusSummary.TAG)
+        val transactions: FragmentTransaction =
+            this.supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.enter_right_slide,
+                    R.anim.exit_left_slide,
+                    R.anim.enter_left_slide,
+                    R.anim.exit_right_slide
+                )
+                .replace(R.id.mainFragmentContainer, BusSummary.newInstance(routeId), BusSummary.TAG)
+        transactions.addToBackStack(null).commitAllowingStateLoss()
+//        replaceFragment(R.id.mainFragmentContainer, BusSummary.newInstance(routeId), BusSummary.TAG)
     }
 
     override fun swapToCommentBoard(routeNo: String) {
-        replaceFragment(R.id.mainFragmentContainer, CommentBoard.newInstance(routeNo), CommentBoard.TAG
-        )
+        val transactions: FragmentTransaction =
+            this.supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.enter_bottom_slide,
+                    R.anim.exit_top_slide,
+                    R.anim.enter_top_slide,
+                    R.anim.exit_bottom_slide)
+                .replace(R.id.mainFragmentContainer, CommentBoard.newInstance(routeNo), CommentBoard.TAG)
+        transactions.addToBackStack(null).commitAllowingStateLoss()
+//        replaceFragment(R.id.mainFragmentContainer, CommentBoard.newInstance(routeNo), CommentBoard.TAG)
     }
     override fun swapToAddComment(routeId: String) {
-        replaceFragment(R.id.mainFragmentContainer, AddComment.newInstance(routeId), AddComment.TAG
-        )
+        val transactions: FragmentTransaction =
+            this.supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.enter_bottom_slide,
+                    R.anim.exit_top_slide,
+                    R.anim.enter_top_slide,
+                    R.anim.exit_bottom_slide)
+                .replace(R.id.mainFragmentContainer, AddComment.newInstance(routeId), AddComment.TAG)
+        transactions.addToBackStack(null).commitAllowingStateLoss()
+//        replaceFragment(R.id.mainFragmentContainer, AddComment.newInstance(routeId), AddComment.TAG)
     }
 
     override fun swapToEditComment(routeId: String, stopRn: String) {
