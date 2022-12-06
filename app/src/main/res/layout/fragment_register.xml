@@ -20,12 +20,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/maru_regular"
         android:text="@string/first_name" />
 
     <EditText
         android:id="@+id/etxt_first_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/maru_regular"
         android:hint="John"
         android:importantForAutofill="no"
         android:inputType="text"
@@ -34,6 +36,7 @@
 
     <TextView
         android:layout_width="match_parent"
+        android:fontFamily="@font/maru_regular"
         android:layout_height="wrap_content"
         android:text="@string/last_name" />
 
@@ -41,6 +44,7 @@
         android:id="@+id/etxt_last_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/maru_regular"
         android:hint="Doe"
         android:importantForAutofill="no"
         android:inputType="text"
@@ -50,6 +54,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/maru_regular"
         android:text="@string/email" />
 
     <EditText
@@ -59,6 +64,7 @@
         android:hint="JohnDoe@doe.com"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
+        android:fontFamily="@font/maru_regular"
         android:minHeight="48dp"
         android:textColorHint="#757575"
         tools:ignore="HardcodedText" />
@@ -66,6 +72,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/maru_regular"
         android:text="@string/user_name" />
 
     <EditText
@@ -74,6 +81,7 @@
         android:layout_height="wrap_content"
         android:hint="John Doe"
         android:importantForAutofill="no"
+        android:fontFamily="@font/maru_regular"
         android:inputType="text"
         android:minHeight="48dp"
         tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
@@ -81,6 +89,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/maru_regular"
         android:text="@string/Password" />
 
     <EditText
@@ -90,6 +99,7 @@
         android:hint="John Doe"
         android:importantForAutofill="no"
         android:inputType="textPassword"
+        android:fontFamily="@font/maru_regular"
         android:minHeight="48dp"
         tools:ignore="HardcodedText" />
 
@@ -102,6 +112,7 @@
             android:id="@+id/btn_cancel"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
+            android:fontFamily="@font/maru_bold"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/cancel"
@@ -112,6 +123,7 @@
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/maru_bold"
             android:layout_weight="1"
             android:text="@string/save"
             android:textColor="#D32F2F" />

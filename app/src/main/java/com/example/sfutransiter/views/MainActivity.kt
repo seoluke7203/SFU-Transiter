@@ -109,11 +109,12 @@ class MainActivity : BaseActivity(),
     }
 
     override fun swapToSelectBus() {
-        replaceFragment(R.id.mainFragmentContainer, SelectBus.newInstance(), SelectBus.TAG)
+        replaceFragment(R.id.mainFragmentContainer, SelectBus.newInstance(), BusSummary.TAG)
     }
 
     override fun swapToSelectStation() {
         replaceFragment(R.id.mainFragmentContainer, SelectStation.newInstance(), BusSummary.TAG)
+
     }
 
     override fun swapToBusSummary(routeId: String) {
@@ -121,16 +122,21 @@ class MainActivity : BaseActivity(),
     }
 
     override fun swapToCommentBoard(routeNo: String) {
-        replaceFragment(R.id.mainFragmentContainer, CommentBoard.newInstance(routeNo), CommentBoard.TAG
+        replaceFragment(
+            R.id.mainFragmentContainer,
+            CommentBoard.newInstance(routeNo),
+            CommentBoard.TAG
         )
     }
     override fun swapToAddComment(routeId: String) {
-        replaceFragment(R.id.mainFragmentContainer, AddComment.newInstance(routeId), AddComment.TAG
-        )
+        replaceFragment(R.id.mainFragmentContainer, AddComment.newInstance(routeId), AddComment.TAG)
     }
 
     override fun swapToEditComment(routeId: String, stopRn: String) {
-        replaceFragment(R.id.mainFragmentContainer, EditComment.newInstance(routeId,stopRn), EditComment.TAG
+        replaceFragment(
+            R.id.mainFragmentContainer,
+            EditComment.newInstance(routeId, stopRn),
+            EditComment.TAG
         )
     }
 
