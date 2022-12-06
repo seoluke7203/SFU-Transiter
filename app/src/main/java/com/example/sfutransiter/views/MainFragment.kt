@@ -18,12 +18,15 @@ import com.example.sfutransiter.model.view_model.MyViewModelFactory
 import com.example.sfutransiter.model.view_model.UserViewModel
 import com.example.sfutransiter.repository.AWSRepo
 import com.example.sfutransiter.util.observeOnce
+import com.example.sfutransiter.views.components.ProgressController
 
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var mainFragmentInterface: MainFragmentInterface
+
+    private lateinit var progressController: ProgressController
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -56,6 +59,7 @@ class MainFragment : Fragment() {
 
     private fun setupLoginButton() {
         binding.btnLogin.setOnClickListener {
+            val progressController = ProgressController(binding.btnLogin, binding.progress.root)
             val userRepo = AWSRepo(RetrofitAPI.getAWSInstance())
             val userViewModelFactory = MyViewModelFactory(userRepo)
             val userViewModel =
@@ -63,6 +67,7 @@ class MainFragment : Fragment() {
             val userName = binding.editUsername.text.toString()
             val password = binding.editPassword.text.toString()
 
+            progressController.start()
             userViewModel.checkUserAuthorized(userName, User.RequestBodyAuth(password))
                 .observeOnce(viewLifecycleOwner) {
                     if (!it.isSuccessful) {
@@ -76,6 +81,7 @@ class MainFragment : Fragment() {
                             ),
                             Toast.LENGTH_SHORT
                         ).show()
+                        progressController.end()
                         return@observeOnce
                     }
                     if (!it.body()!!.authorized) {
@@ -84,6 +90,7 @@ class MainFragment : Fragment() {
                             getString(R.string.Invalid_login),
                             Toast.LENGTH_SHORT
                         ).show()
+                        progressController.end()
                         return@observeOnce
                     }
                     val body = it.body()!!
