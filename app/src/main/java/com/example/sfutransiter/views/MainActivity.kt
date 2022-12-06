@@ -4,12 +4,15 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
 import com.example.sfutransiter.R
 import com.example.sfutransiter.databinding.ActivityMainBinding
 import com.example.sfutransiter.util.Util
+import com.example.sfutransiter.views.add_comment.AddComment
+import com.example.sfutransiter.views.add_comment.EditComment
 import com.example.sfutransiter.views.bus_summary.BusSummary
 import com.example.sfutransiter.views.comment_board.CommentBoard
 import com.example.sfutransiter.views.components.BaseActivity
@@ -18,6 +21,7 @@ import com.example.sfutransiter.views.register.Register
 import com.example.sfutransiter.views.search_by.SearchBy
 import com.example.sfutransiter.views.select_bus.SelectBus
 import com.example.sfutransiter.views.select_station.SelectStation
+import kotlin.system.exitProcess
 
 private var shown = false
 
@@ -27,7 +31,10 @@ class MainActivity : BaseActivity(),
     SelectBus.SelectBusInterface,
     SelectStation.SelectStationInterface,
     BusSummary.BusSummaryInterface,
-    Register.RegisterInterface {
+    Register.RegisterInterface,
+    CommentBoard.CommentInterface,
+    AddComment.AddCommentInterface,
+    EditComment.EditCommentInterface{
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
@@ -48,6 +55,15 @@ class MainActivity : BaseActivity(),
                 false
             )
         shown = true
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (supportFragmentManager.backStackEntryCount == 0) {
+                    exitProcess(0)
+                } else {
+                    popBackStack()
+                }
+            }
+        })
     }
 
     private fun showDisclaimerDialog() {
@@ -130,10 +146,16 @@ class MainActivity : BaseActivity(),
     }
 
     override fun swapToCommentBoard(routeNo: String) {
-        replaceFragment(
-            R.id.mainFragmentContainer,
-            CommentBoard.newInstance(routeNo),
-            CommentBoard.TAG
+        replaceFragment(R.id.mainFragmentContainer, CommentBoard.newInstance(routeNo), CommentBoard.TAG
+        )
+    }
+    override fun swapToAddComment(routeId: String) {
+        replaceFragment(R.id.mainFragmentContainer, AddComment.newInstance(routeId), AddComment.TAG
+        )
+    }
+
+    override fun swapToEditComment(routeId: String, stopRn: String) {
+        replaceFragment(R.id.mainFragmentContainer, EditComment.newInstance(routeId,stopRn), EditComment.TAG
         )
     }
 

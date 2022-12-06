@@ -51,7 +51,7 @@ interface RetrofitInterface {
         @POST("busStop/{busStop}")
         suspend fun insertBusStopReview(
             @Path("busStop") stopNo: String,
-            @Body body: BusStopReview.Request
+            @Body body: BusStopReview.RequestBody
         ): Response<BusStopReview.Response>
 
         @Headers("Content-Type: application/json")
@@ -59,7 +59,14 @@ interface RetrofitInterface {
         suspend fun updateBusStopReview(
             @Path("busStop") stopNo: String,
             @Path("stopReviewRn") stopReviewRn: String,
-            @Body body: BusStopReview.Request
+            @Body body: BusStopReview.RequestBody
+        ): Response<BusStopReview.Response>
+
+        @Headers("Content-Type: application/json")
+        @DELETE("busStop/{busStop}/stopReview/{stopReviewRn}")
+        suspend fun deleteBusStopReview(
+            @Path("busStop") stopNo: String,
+            @Path("stopReviewRn") stopReviewRn: String,
         ): Response<BusStopReview.Response>
 
         @Headers("Content-Type: application/json")
@@ -67,6 +74,52 @@ interface RetrofitInterface {
         suspend fun listBusStopReviews(
             @Path("busStop") stopNo: String
         ): Response<BusStopReview.ResponseList>
+
+        // ==========================================================================================
+        // USERS
+        @Headers("Content-Type: application/json")
+        @POST("user")
+        suspend fun createUser(
+            @Body body: User.RequestBody
+        ): Response<User.Response>
+
+        @Headers("Content-Type: application/json")
+        @GET("user/userName/{userName}/userRn/{userRn}")
+        suspend fun getUser(
+            @Path("userName") userName: String,
+            @Path("userRn") userRn: String
+        ): Response<User.Response>
+
+        @Headers("Content-Type: application/json")
+        @PUT("user/userName/{userName}")
+        suspend fun updateUser(
+            @Path("userName") userName: String,
+            @Body body: User.RequestBody
+        ): Response<User.Response>
+
+        @Headers("Content-Type: application/json")
+        @HTTP(method = "DELETE", path = "user/userName/{userName}", hasBody = true)
+        suspend fun deleteUser(
+            @Path("userName") userName: String,
+            @Body body: User.RequestBodyAuth
+        ): Response<User.Response>
+
+        // ==============
+        // AUTH
+        @Headers("Content-Type: application/json")
+        @PUT("userAuth/userName/{userName}/auth")
+        suspend fun checkUserAuthorized(
+            @Path("userName") userName: String,
+            @Body body: User.RequestBodyAuth
+        ): Response<User.ResponseAuth>
+
+        // TODO backend wrong path param joi schema
+        @Headers("Content-Type: application/json")
+        @PUT("userAuth/userName/{userName}")
+        suspend fun updateUserPassword(
+            @Path("userName") userName: String,
+            @Body body: User.RequestBodyAuth
+        ): Response<User.ResponseAuth>
 
         @GET("ping")
         suspend fun ping(): Response<Void>

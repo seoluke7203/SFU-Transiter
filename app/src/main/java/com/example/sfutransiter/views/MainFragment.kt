@@ -6,8 +6,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.sfutransiter.R
+import com.example.sfutransiter.backend.RetrofitAPI
 import com.example.sfutransiter.databinding.FragmentMainBinding
+import com.example.sfutransiter.model.ResponseError
+import com.example.sfutransiter.model.User
+import com.example.sfutransiter.model.view_model.MyViewModelFactory
+import com.example.sfutransiter.model.view_model.UserViewModel
+import com.example.sfutransiter.repository.AWSRepo
+import com.example.sfutransiter.util.observeOnce
 
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
@@ -40,6 +50,46 @@ class MainFragment : Fragment() {
         }
         binding.btnRegister.setOnClickListener {
             mainFragmentInterface.swapToRegister()
+        }
+        setupLoginButton()
+    }
+
+    private fun setupLoginButton() {
+        binding.btnLogin.setOnClickListener {
+            val userRepo = AWSRepo(RetrofitAPI.getAWSInstance())
+            val userViewModelFactory = MyViewModelFactory(userRepo)
+            val userViewModel =
+                ViewModelProvider(this, userViewModelFactory)[UserViewModel::class.java]
+            val userName = binding.editUsername.text.toString()
+            val password = binding.editPassword.text.toString()
+
+            userViewModel.checkUserAuthorized(userName, User.RequestBodyAuth(password))
+                .observeOnce(viewLifecycleOwner) {
+                    if (!it.isSuccessful) {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(
+                                R.string.fail_login,
+                                ResponseError.fromJsonString(
+                                    it.errorBody()!!.string()
+                                ).error.details[0].message
+                            ),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return@observeOnce
+                    }
+                    if (!it.body()!!.authorized) {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.Invalid_login),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return@observeOnce
+                    }
+                    val body = it.body()!!
+                    User.setCurrentUser(body.userRn, body.userName)
+                    mainFragmentInterface.swapToSearchBy()
+                }
         }
     }
 
