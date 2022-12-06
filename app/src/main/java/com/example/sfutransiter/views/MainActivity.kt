@@ -1,13 +1,11 @@
 package com.example.sfutransiter.views
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentTransaction
 import com.example.sfutransiter.R
 import com.example.sfutransiter.databinding.ActivityMainBinding
 import com.example.sfutransiter.util.Util
@@ -103,103 +101,42 @@ class MainActivity : BaseActivity(),
     }
 
     override fun swapToSearchBy() {
-        val transaction: FragmentTransaction =
-            this.supportFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.enter_fade_in,   // new fragment entering
-                    R.anim.scale,    // existing fragment
-                    R.anim.enter_fade_in,    // remaining fragment when exiting
-                    R.anim.exit_fade_out)    // animation when exisitng
-                .replace(R.id.mainFragmentContainer, SearchBy.newInstance(), SearchBy.TAG)
-        transaction.addToBackStack(null).commitAllowingStateLoss()
-//        replaceFragment(R.id.mainFragmentContainer, SearchBy.newInstance(), SearchBy.TAG, false)
+        replaceFragment(R.id.mainFragmentContainer, SearchBy.newInstance(), SearchBy.TAG, false)
     }
 
     override fun swapToRegister() {
-        val transaction: FragmentTransaction =
-            this.supportFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.enter_bottom_slide,
-                    R.anim.exit_top_slide,
-                    R.anim.enter_top_slide,
-                    R.anim.exit_bottom_slide)
-                .replace(R.id.mainFragmentContainer, Register.newInstance(), Register.TAG)
-        transaction.addToBackStack(null).commitAllowingStateLoss()
-
-//        replaceFragment(R.id.mainFragmentContainer, Register.newInstance(), Register.TAG)
+        replaceFragment(R.id.mainFragmentContainer, Register.newInstance(), Register.TAG)
     }
 
-    @SuppressLint("ResourceType")
     override fun swapToSelectBus() {
-        val transaction: FragmentTransaction =
-            this.supportFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.enter_fade_in,   // new fragment entering
-                    R.anim.exit_fade_out,    // existing fragment
-                    R.anim.enter_fade_in,    // remaining fragment when exiting
-                    R.anim.exit_fade_out)    // animation when exisitng
-                .replace(R.id.mainFragmentContainer, SelectBus.newInstance(), SelectBus.TAG)
-        transaction.addToBackStack(null).commitAllowingStateLoss()
-//        replaceFragment(R.id.mainFragmentContainer, SelectBus.newInstance(), BusSummary.TAG)
+        replaceFragment(R.id.mainFragmentContainer, SelectBus.newInstance(), BusSummary.TAG)
     }
 
     override fun swapToSelectStation() {
-        overridePendingTransition(R.anim.enter_fade_in, R.anim.exit_fade_out)
-        val transactions: FragmentTransaction =
-            this.supportFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.enter_right_slide,
-                    R.anim.exit_left_slide,
-                    R.anim.enter_left_slide,
-                    R.anim.exit_right_slide
-                )
-                .replace(R.id.mainFragmentContainer, SelectStation.newInstance(), BusSummary.TAG)
-        transactions.addToBackStack(null).commitAllowingStateLoss()
-//        replaceFragment(R.id.mainFragmentContainer, SelectStation.newInstance(), BusSummary.TAG)
+        replaceFragment(R.id.mainFragmentContainer, SelectStation.newInstance(), BusSummary.TAG)
 
     }
 
     override fun swapToBusSummary(routeId: String) {
-        val transactions: FragmentTransaction =
-            this.supportFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.enter_right_slide,
-                    R.anim.exit_left_slide,
-                    R.anim.enter_left_slide,
-                    R.anim.exit_right_slide
-                )
-                .replace(R.id.mainFragmentContainer, BusSummary.newInstance(routeId), BusSummary.TAG)
-        transactions.addToBackStack(null).commitAllowingStateLoss()
-//        replaceFragment(R.id.mainFragmentContainer, BusSummary.newInstance(routeId), BusSummary.TAG)
+        replaceFragment(R.id.mainFragmentContainer, BusSummary.newInstance(routeId), BusSummary.TAG)
     }
 
     override fun swapToCommentBoard(routeNo: String) {
-        val transactions: FragmentTransaction =
-            this.supportFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.enter_bottom_slide,
-                    R.anim.exit_top_slide,
-                    R.anim.enter_top_slide,
-                    R.anim.exit_bottom_slide)
-                .replace(R.id.mainFragmentContainer, CommentBoard.newInstance(routeNo), CommentBoard.TAG)
-        transactions.addToBackStack(null).commitAllowingStateLoss()
-//        replaceFragment(R.id.mainFragmentContainer, CommentBoard.newInstance(routeNo), CommentBoard.TAG)
+        replaceFragment(
+            R.id.mainFragmentContainer,
+            CommentBoard.newInstance(routeNo),
+            CommentBoard.TAG
+        )
     }
     override fun swapToAddComment(routeId: String) {
-        val transactions: FragmentTransaction =
-            this.supportFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.enter_bottom_slide,
-                    R.anim.exit_top_slide,
-                    R.anim.enter_top_slide,
-                    R.anim.exit_bottom_slide)
-                .replace(R.id.mainFragmentContainer, AddComment.newInstance(routeId), AddComment.TAG)
-        transactions.addToBackStack(null).commitAllowingStateLoss()
-//        replaceFragment(R.id.mainFragmentContainer, AddComment.newInstance(routeId), AddComment.TAG)
+        replaceFragment(R.id.mainFragmentContainer, AddComment.newInstance(routeId), AddComment.TAG)
     }
 
     override fun swapToEditComment(routeId: String, stopRn: String) {
-        replaceFragment(R.id.mainFragmentContainer, EditComment.newInstance(routeId,stopRn), EditComment.TAG
+        replaceFragment(
+            R.id.mainFragmentContainer,
+            EditComment.newInstance(routeId, stopRn),
+            EditComment.TAG
         )
     }
 
