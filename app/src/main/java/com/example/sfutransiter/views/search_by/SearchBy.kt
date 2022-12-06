@@ -1,5 +1,6 @@
 package com.example.sfutransiter.views.search_by
 
+import android.R
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -7,8 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.sfutransiter.databinding.FragmentSearchByBinding
 import com.example.sfutransiter.views.MainFragment
+
 
 class SearchBy : Fragment() {
     private var _binding: FragmentSearchByBinding? = null
@@ -38,9 +42,12 @@ class SearchBy : Fragment() {
         return binding.root
     }
 
+
     private fun setupButtons() {
         binding.btnBus.setOnClickListener {
             searchByFragmentInterface.swapToSelectBus()
+
+
         }
         binding.btnBusStop.setOnClickListener {
             searchByFragmentInterface.swapToSelectStation()

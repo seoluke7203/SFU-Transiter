@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.sfutransiter.R
 import com.example.sfutransiter.databinding.FragmentSelectBusBinding
 import com.example.sfutransiter.model.RouteID
 import com.example.sfutransiter.views.MainFragment
@@ -37,6 +38,8 @@ class SelectBus : Fragment() {
     }
 
     private fun setupButtons() {
+
+
         binding.btn144.setOnClickListener {
             selectBusInterface.swapToBusSummary(RouteID.`144`)
         }

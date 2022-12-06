@@ -1,14 +1,21 @@
 package com.example.sfutransiter.views.comment_board
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.core.content.ContextCompat.getDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sfutransiter.R
 import com.example.sfutransiter.model.BusStopReview
 
 class CommentAdapter : RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
+
+
 
     //TODO wait until AWS is back up
     private lateinit var myComments : ArrayList<BusStopReview.Response>
@@ -16,16 +23,24 @@ class CommentAdapter : RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.comment_item, parent,false)
 
+
         //TODO remove when AWS is back up
         myComments = ArrayList()
 
+//        android:tint="#ff0000" red
+//        app:tint="#0000FF" blue
+
         return ViewHolder(view)
+
+
     }
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //TODO wait until AWS is back up
         //val commentItem = myComments.get(position)
         //holder.commentText.text = commentItem.comment
+
     }
 
     override fun getItemCount(): Int {

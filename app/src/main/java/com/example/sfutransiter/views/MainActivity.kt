@@ -1,10 +1,12 @@
 package com.example.sfutransiter.views
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentTransaction
 import com.example.sfutransiter.R
 import com.example.sfutransiter.databinding.ActivityMainBinding
 import com.example.sfutransiter.util.Util
@@ -85,6 +87,7 @@ class MainActivity : BaseActivity(),
     }
 
     override fun swapToSearchBy() {
+
         replaceFragment(R.id.mainFragmentContainer, SearchBy.newInstance(), SearchBy.TAG, false)
     }
 
@@ -92,12 +95,34 @@ class MainActivity : BaseActivity(),
         replaceFragment(R.id.mainFragmentContainer, Register.newInstance(), Register.TAG)
     }
 
+    @SuppressLint("ResourceType")
     override fun swapToSelectBus() {
-        replaceFragment(R.id.mainFragmentContainer, SelectBus.newInstance(), SelectBus.TAG)
+        val transaction: FragmentTransaction =
+            this.supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.enter,   // new fragment entering
+                    R.anim.exit,    // existing fragment
+                    R.anim.enter,    // remaining fragment when exiting
+                    R.anim.exit)    // animation when exisitng
+                .replace(R.id.mainFragmentContainer, SelectBus.newInstance(), SelectBus.TAG)
+        transaction.addToBackStack(null).commitAllowingStateLoss()
+//        replaceFragment(R.id.mainFragmentContainer, SelectBus.newInstance(), BusSummary.TAG)
     }
 
     override fun swapToSelectStation() {
-        replaceFragment(R.id.mainFragmentContainer, SelectStation.newInstance(), BusSummary.TAG)
+        overridePendingTransition(R.anim.enter, R.anim.exit)
+        val transactions: FragmentTransaction =
+            this.supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.right_enter,
+                    R.anim.left_exit,
+                    R.anim.left_enter,
+                    R.anim.right_exit
+                )
+                .replace(R.id.mainFragmentContainer, SelectStation.newInstance(), BusSummary.TAG)
+        transactions.addToBackStack(null).commitAllowingStateLoss()
+//        replaceFragment(R.id.mainFragmentContainer, SelectStation.newInstance(), BusSummary.TAG)
+
     }
 
     override fun swapToBusSummary(routeId: String) {
