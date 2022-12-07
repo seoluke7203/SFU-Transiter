@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@id/txtAuthor" />
 
     <ImageView
-        android:id="@+id/imgWarning"
+        android:id="@+id/imgCrowd"
         android:layout_width="64dp"
         android:layout_height="56dp"
         android:layout_marginStart="244dp"
@@ -56,7 +56,7 @@
         app:layout_constraintVertical_bias="0.464" />
 
     <ImageView
-        android:id="@+id/imgWarning2"
+        android:id="@+id/imgWarning"
         android:layout_width="64dp"
         android:layout_height="56dp"
         android:layout_marginStart="320dp"

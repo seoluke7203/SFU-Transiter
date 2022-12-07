@@ -45,8 +45,6 @@ class BusRecyclerAdapter(private val buses: Array<Bus>) :
             dest = startStop + "-> SFU"
         }
 
-
-
         holder.busDestination.text = dest
         holder.departedAt.text = busItem.vehicleNo
         holder.lastUpdatedAt.text = "Last Updated At: ${busItem.recordedTime}"

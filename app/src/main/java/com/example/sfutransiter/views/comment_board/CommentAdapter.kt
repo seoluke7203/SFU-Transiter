@@ -1,9 +1,12 @@
 package com.example.sfutransiter.views.comment_board
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +31,21 @@ class CommentAdapter(commentInterface : CommentBoard.CommentInterface) : Recycle
         holder.commentText.text = commentItem.comment
         holder.commentUser.text = commentItem.author.userName
 
+        when (commentItem.safety){
+            "RED" -> holder.imageWarnings.imageTintList = ColorStateList.valueOf(Color.parseColor("#FF0000"))
+            "ORANGE" -> holder.imageWarnings.imageTintList = ColorStateList.valueOf(Color.parseColor("#FFD400"))
+            "GREEN" -> holder.imageWarnings.imageTintList = ColorStateList.valueOf(Color.parseColor("#008000"))
+        }
+
+        when (commentItem.crowd){
+            3 -> holder.imageCrowd.imageTintList = ColorStateList.valueOf(Color.parseColor("#FF0000"))
+            2 -> holder.imageCrowd.imageTintList = ColorStateList.valueOf(Color.parseColor("#FFD400"))
+            1 -> holder.imageCrowd.imageTintList = ColorStateList.valueOf(Color.parseColor("#008000"))
+        }
+            println("hello: ${commentItem.safety}, ${commentItem.crowd}")
+
+
+
         if(commentItem.author.rn == User.getCurrentUser().userRn) {
             holder.commentItemList.setOnClickListener {
                 myInterface.swapToEditComment(commentItem.routeNo,commentItem.stopReviewRn)
@@ -47,5 +65,7 @@ class CommentAdapter(commentInterface : CommentBoard.CommentInterface) : Recycle
         val commentText: TextView = itemView.findViewById(R.id.txtComments)
         val commentUser : TextView = itemView.findViewById(R.id.txtAuthor)
         val commentItemList : ConstraintLayout = itemView.findViewById(R.id.commentItem)
+        val imageCrowd: ImageView = itemView.findViewById(R.id.imgCrowd)
+        val imageWarnings: ImageView = itemView.findViewById(R.id.imgWarning)
     }
 }

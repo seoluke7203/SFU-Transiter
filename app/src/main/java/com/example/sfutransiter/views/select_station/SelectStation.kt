@@ -32,7 +32,7 @@ class SelectStation : Fragment(), LocationListener {
     private val binding get() = _binding!!
     private lateinit var selectStationInterface: SelectStationInterface
     private lateinit var locationManager : LocationManager
-    private lateinit var currentLocation : Location
+    private var currentLocation : Location? = null
     private lateinit var nearbyStops: LiveData<Response<Array<BusStop>>>
     private lateinit var listStops: LiveData<Response<Array<BusStop>>>
     private lateinit var adapterList : StationListAdapter
@@ -57,7 +57,8 @@ class SelectStation : Fragment(), LocationListener {
         val viewModel = ViewModelProvider(this, viewModelFactory)[TransitViewModel::class.java]
 
         getCurrentLocation()
-        nearbyStops = viewModel.getStopsNear(roundToSix(currentLocation.latitude),roundToSix(currentLocation.longitude), 200)
+        nearbyStops = currentLocation?.let { roundToSix(it.latitude) }
+            ?.let { viewModel.getStopsNear(it,roundToSix(currentLocation!!.longitude), 200) }!!
 
         //Get all related stops near SFU Burnaby
         val sfuLat = 49.2781
@@ -104,9 +105,9 @@ class SelectStation : Fragment(), LocationListener {
                 Log.e(MainFragment.TAG, "getCurrentLocation: Locations permissions not granted")
                 return
             }
-            currentLocation = locationManager.getLastKnownLocation(provider)!!
-            if(currentLocation != null)
-                onLocationChanged(currentLocation)
+            if(locationManager.getLastKnownLocation(provider) != null)
+                currentLocation = locationManager.getLastKnownLocation(provider)!!
+            currentLocation?.let { onLocationChanged(it) }
             locationManager.requestLocationUpdates(provider,10000,10f,this)
         }
     }
@@ -134,7 +135,6 @@ class SelectStation : Fragment(), LocationListener {
     companion object {
         @JvmStatic
         fun newInstance() = SelectStation()
-
         val TAG: String = SelectStation::class.java.simpleName
     }
 }

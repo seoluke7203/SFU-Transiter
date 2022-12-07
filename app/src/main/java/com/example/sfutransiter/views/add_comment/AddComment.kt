@@ -14,6 +14,7 @@ import com.example.sfutransiter.backend.RetrofitAPI
 import com.example.sfutransiter.databinding.FragmentAddCommentBinding
 import com.example.sfutransiter.model.BusStopReview
 import com.example.sfutransiter.model.ResponseError
+import com.example.sfutransiter.model.Safety
 import com.example.sfutransiter.model.User
 import com.example.sfutransiter.model.view_model.BusReviewViewModel
 import com.example.sfutransiter.model.view_model.MyViewModelFactory
@@ -77,9 +78,8 @@ class AddComment : Fragment() {
 
     private fun insertReview() {
         val routeNo = routeId
-        var userRating = binding.commentRating.rating
         val comment = binding.txtComment.text.toString()
-        val safety = binding.txtSafety.text.toString()
+        var safety : String? = null
         var crowd = 0
         var authorRn : String? = null
         var userName = ""
@@ -90,6 +90,13 @@ class AddComment : Fragment() {
             crowd = 2
         else
             crowd = 3
+
+        if(binding.radioSafety.checkedRadioButtonId == binding.safe.id)
+            safety = Safety.GREEN.level
+        else if (binding.radioSafety.checkedRadioButtonId == binding.moderate.id)
+            safety = Safety.ORANGE.level
+        else
+            safety = Safety.RED.level
 
         if (User.getCurrentUser().userName == "") {
             userName = "Anonymous"

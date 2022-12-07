@@ -15,6 +15,7 @@ import com.example.sfutransiter.backend.RetrofitAPI
 import com.example.sfutransiter.databinding.FragmentEditCommentBinding
 import com.example.sfutransiter.model.BusStopReview
 import com.example.sfutransiter.model.ResponseError
+import com.example.sfutransiter.model.Safety
 import com.example.sfutransiter.model.User
 import com.example.sfutransiter.model.view_model.BusReviewViewModel
 import com.example.sfutransiter.model.view_model.MyViewModelFactory
@@ -77,13 +78,19 @@ class EditComment : Fragment() {
             for(i in oldReviewArray)
                 if(i.stopReviewRn == stopRn) {
                     binding.txtComment.setText(i.comment)
-                    binding.txtSafety.setText(i.safety)
                     if (i.crowd == 1)
                         binding.radioCrowd.check(binding.low.id)
                     else if (i.crowd == 2)
                         binding.radioCrowd.check(binding.med.id)
                     else
                         binding.radioCrowd.check(binding.high.id)
+
+                    if (i.safety == Safety.GREEN.level)
+                        binding.radioSafety.check(binding.safe.id)
+                    else if (i.safety == Safety.ORANGE.level)
+                        binding.radioSafety.check(binding.moderate.id)
+                    else
+                        binding.radioSafety.check(binding.danger.id)
                     break
                 }
 
@@ -125,9 +132,8 @@ class EditComment : Fragment() {
 
     private fun updateReview() {
         val routeNo: String? = null
-        var userRating = binding.commentRating.rating
         val comment = binding.txtComment.text.toString()
-        val safety = binding.txtSafety.text.toString()
+        var safety : String? = null
         var crowd : Int
         val authorRn = User.getCurrentUser().userRn
         val userName = User.getCurrentUser().userName
@@ -138,6 +144,13 @@ class EditComment : Fragment() {
             crowd = 2
         else
             crowd = 3
+
+        if(binding.radioSafety.checkedRadioButtonId == binding.safe.id)
+            safety = Safety.GREEN.level
+        else if (binding.radioCrowd.checkedRadioButtonId == binding.moderate.id)
+            safety = Safety.ORANGE.level
+        else
+            safety = Safety.RED.level
 
         awsViewModel.updateBusStopReview(
             routeId,

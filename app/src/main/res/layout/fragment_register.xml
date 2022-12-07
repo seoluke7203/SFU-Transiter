@@ -118,15 +118,27 @@
             android:text="@string/cancel"
             android:textColor="#D32F2F" />
 
-        <Button
-            android:id="@+id/btn_save"
-            style="?android:attr/buttonBarButtonStyle"
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/maru_bold"
-            android:layout_weight="1"
-            android:text="@string/save"
-            android:textColor="#D32F2F" />
+            android:layout_weight="1">
+
+            <include
+                layout="@layout/indeterminate_progress"
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_save"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/maru_bold"
+                android:text="@string/save"
+                android:textColor="#D32F2F" />
+        </FrameLayout>
     </LinearLayout>
 
 </LinearLayout>

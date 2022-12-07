@@ -9,19 +9,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/your_rating"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"/>
-
-    <RatingBar
-        android:id="@+id/comment_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:rating="0"
-        android:layout_marginStart="16dp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="@string/crowd"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"/>
@@ -56,13 +43,29 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"/>
 
-    <EditText
-        android:id="@+id/txt_safety"
+    <RadioGroup
+        android:id="@+id/radio_safety"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="@string/safety_hint"
-        android:layout_marginStart="16dp" />
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/safe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Safe" />
+        <RadioButton
+            android:id="@+id/moderate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Moderate"/>
+        <RadioButton
+            android:id="@+id/danger"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Dangerous"/>
+    </RadioGroup>
 
     <TextView
         android:layout_width="match_parent"
