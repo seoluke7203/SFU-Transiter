@@ -19,6 +19,7 @@ import com.example.sfutransiter.model.view_model.UserViewModel
 import com.example.sfutransiter.repository.AWSRepo
 import com.example.sfutransiter.util.observeOnce
 import com.example.sfutransiter.views.MainFragment
+import com.example.sfutransiter.views.components.ProgressController
 
 class Register : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
@@ -57,12 +58,14 @@ class Register : Fragment() {
 
     private fun setupButtons() {
         binding.btnSave.setOnClickListener {
+            val progressController = ProgressController(binding.btnSave, binding.progress.root)
             val firstName = binding.etxtFirstName.text.toString()
             val lastName = binding.etxtLastName.text.toString()
             val email = binding.etxtEmail.text.toString()
             val userName = binding.etxtUsername.text.toString()
             val password = binding.etxtPassword.text.toString()
 
+            progressController.start()
             userViewModel.createUser(
                 User.RequestBody(
                     userName,
@@ -83,6 +86,7 @@ class Register : Fragment() {
                         ),
                         Toast.LENGTH_SHORT
                     ).show()
+                    progressController.end()
                     return@observeOnce
                 }
                 Toast.makeText(
