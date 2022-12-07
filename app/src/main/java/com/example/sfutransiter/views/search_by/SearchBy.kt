@@ -44,11 +44,11 @@ class SearchBy : Fragment() {
 
 
     private fun setupButtons() {
-        binding.btnBus.setOnClickListener {
-            searchByFragmentInterface.swapToSelectBus()
-
-
-        }
+//        binding.btnBus.setOnClickListener {
+//            searchByFragmentInterface.swapToSelectBus()
+//
+//
+//        }
         binding.btnBusStop.setOnClickListener {
             searchByFragmentInterface.swapToSelectStation()
         }
