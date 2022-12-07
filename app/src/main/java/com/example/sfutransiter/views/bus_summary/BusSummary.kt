@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.sfutransiter.R
 import com.example.sfutransiter.backend.RetrofitAPI
 import com.example.sfutransiter.databinding.FragmentBusSummaryBinding
@@ -74,6 +75,13 @@ class BusSummary : Fragment() {
         setupRating()
         setupCommentBtn()
         setupList()
+
+
+        var swipe = binding.swipeLayout
+        swipe.setOnRefreshListener {
+            setupList()
+            swipe.isRefreshing = false
+        }
 
         return binding.root
     }
