@@ -37,5 +37,17 @@ Now we need the AWS URL (or key) to communicate with our backend. For this, cont
 
 see https://www.translink.ca/about-us/doing-business-with-translink/app-developer-resources for more information
 
+
+### Example Screen
+
+![screen_welcome](screen1.jpg)
+
+
+![screen_login](screen2.jpg)
+
+
+![screen_main](screen3.png)
+
+
 ## Disclaimer
 Some of the data used in this product or service is provided by permission of TransLink. TransLink assumes no responsibility for the accuracy or currency of the Data used in this product or service.
